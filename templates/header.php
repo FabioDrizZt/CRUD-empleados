@@ -1,3 +1,6 @@
+<?php 
+$url_base="http://localhost/CRUD-empleados/";
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,13 +48,10 @@
         </svg>
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li>
-          <a href="#" class="nav-link px-2 link-dark">Características</a>
-        </li>
-        <li><a href="#" class="nav-link px-2 link-dark">Precios</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Acerca</a></li>
+        <li><a href="<?php echo $url_base ?>index.php" class="nav-link px-2 link-secondary">Inicio</a></li>
+        <li><a href="<?php echo $url_base ?>secciones/empleados/index.php" class="nav-link px-2 link-dark">Empleados</a></li>
+        <li><a href="<?php echo $url_base ?>secciones/puestos/index.php" class="nav-link px-2 link-dark">Puestos</a></li>
+        <li><a href="<?php echo $url_base ?>secciones/usuarios/index.php" class="nav-link px-2 link-dark">Usuarios</a></li>
       </ul>
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">
