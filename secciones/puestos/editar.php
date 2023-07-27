@@ -1,7 +1,6 @@
 <?php require_once '../../bd.php';
 
 if($_POST){
-    print_r($_POST);
     //Recolectar los datos del metodo POST
     $nombredelpuesto = $_POST['nombredelpuesto'];
     $id = $_POST['txtID'];
