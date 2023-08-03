@@ -1,2 +1,2 @@
 .env
-./secciones/empleados/assets/
+/secciones/empleados/assets/*
