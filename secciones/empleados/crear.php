@@ -14,7 +14,7 @@ if ($_POST) {
   $idpuesto = $_POST["idpuesto"];
   // Lo sacamos de $_FILES
   $foto = isset($_FILES["foto"]["name"]) ? $_FILES["foto"]["name"] : "";
-  $cv = $_FILES["cv"]["name"];
+  $cv = isset($_FILES["foto"]["cv"]) ? $_FILES["foto"]["cv"] : "";
 
   $sentencia = $conexion->prepare("INSERT INTO `tbl_empleados`
          (`primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `foto`, `cv`, `idpuesto`) 
@@ -106,7 +106,5 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
-
-
 
 <?php require_once '../../templates/footer.php' ?>

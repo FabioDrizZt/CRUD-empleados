@@ -1,5 +1,33 @@
 <?php require_once '../../bd.php';
 
+if ($_GET) {
+  //Recolectar los datos del metodo GET
+  $txtID = $_GET['txtID'];
+
+  //Logica para la eliminación de los archivos foto y CV
+  $sentencia = $conexion->prepare("SELECT foto, cv FROM `tbl_empleados` WHERE `id`=:id");
+  //Asignar los valores que vienen del meto GET (del formulario)
+  $sentencia->bindParam(':id', $txtID);
+  $sentencia->execute();
+  $registro_recuperado = $sentencia->fetch(PDO::FETCH_ASSOC);
+  if( isset($registro_recuperado["foto"]) && $registro_recuperado["foto"]!="" ) {
+    if(file_exists("./assets/img/" . $registro_recuperado["foto"])){
+      unlink('./assets/img/'.  $registro_recuperado["foto"]);
+    }
+  }
+  if( isset($registro_recuperado["cv"]) && $registro_recuperado["cv"]!="" ) {
+    if(file_exists("./assets/pdf/" . $registro_recuperado["cv"])){
+      unlink('./assets/pdf/'.  $registro_recuperado["cv"]);
+    }
+  }
+  //preparo la inserción de los datos
+  $sentencia = $conexion->prepare("DELETE FROM `tbl_empleados` WHERE `id`=:id");
+  //Asignar los valores que vienen del meto GET (del formulario)
+  $sentencia->bindParam(':id', $txtID);
+  $sentencia->execute();
+  header("Location:index.php");
+}
+
 $sentencia = $conexion->prepare("SELECT *, (
   SELECT nombredelpuesto
   FROM tbl_puestos
@@ -46,14 +74,18 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                   <img class="img-fluid rounded-top" src="<?= "./assets/img/" .  $registro['foto'] ?>" alt="foto-perfil" width=100 />
                 </td>
                 <td>
-                  <a href="<?= "./assets/pdf/" .  $registro['cv'] ?>" download="<?= "CV-" . $registro['primernombre'] . $registro['primerapellido'] ?>">CV</a>
+                  <?php if ($registro['cv'] != "") { ?>
+                    <a href="<?= "./assets/pdf/" .  $registro['cv'] ?>" download="<?= "CV-" . $registro['primernombre'] . $registro['primerapellido'] ?>">CV</a>
+                  <?php } else { ?>
+                    <p>sin CV</p>
+                  <?php } ?>
                 </td>
                 <td><?= $registro['puesto'] ?></td>
                 <td><?= $registro['fechadeingreso'] ?></td>
                 <td>
                   <a class="btn btn-success" href="#" role="button">Carta</a>
-                  <a class="btn btn-info" href="./editar.php" role="button">Editar</a>
-                  <a class="btn btn-danger" href="#" role="button">Borrar</a>
+                  <a class="btn btn-info" href="editar.php?txtID=<?= $registro['id'] ?>" role="button">Editar</a>
+                  <a class="btn btn-danger" href="index.php?txtID=<?= $registro['id'] ?>" role="button">Eliminar</a>
                 </td>
               </tr>
             <?php } ?>
