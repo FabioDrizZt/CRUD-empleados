@@ -1,5 +1,5 @@
-<?php 
-$url_base="http://localhost/CRUD-empleados/";
+<?php
+$url_base = "http://localhost/CRUD-empleados/";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,6 +17,20 @@ $url_base="http://localhost/CRUD-empleados/";
   <!-- instalación de dataTables  -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+  <!-- instalación de SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <?php if (isset($_GET['mensaje'])) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: '<?= $_GET['mensaje'] ?>',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    </script>
+  <?php } ?>
+
+
 </head>
 
 <body>

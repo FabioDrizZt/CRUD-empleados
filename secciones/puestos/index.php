@@ -1,14 +1,15 @@
 <?php require_once '../../bd.php';
 
-if($_GET){
-    //Recolectar los datos del metodo GET
-    $txtID = $_GET['txtID'];
-    //preparo la inserción de los datos
-    $sentencia = $conexion->prepare("DELETE FROM `tbl_puestos` WHERE `id`=:id");
-    //Asignar los valores que vienen del meto POST (del formulario)
-    $sentencia->bindParam(':id', $txtID);
-    $sentencia->execute();
-    header("Location:index.php");
+if ($_GET['txtID']) {
+  //Recolectar los datos del metodo GET
+  $txtID = $_GET['txtID'];
+  //preparo la inserción de los datos
+  $sentencia = $conexion->prepare("DELETE FROM `tbl_puestos` WHERE `id`=:id");
+  //Asignar los valores que vienen del meto POST (del formulario)
+  $sentencia->bindParam(':id', $txtID);
+  $sentencia->execute();
+  $mensaje = "Registro eliminado";
+  header("Location:index.php?mensaje=$mensaje");
 }
 
 $sentencia = $conexion->prepare("SELECT * FROM `tbl_puestos`");
@@ -42,7 +43,7 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <td><?= $registro['nombredelpuesto'] ?></td>
                 <td>
                   <a class="btn btn-info" href="editar.php?txtID=<?= $registro['id'] ?>" role="button">Editar</a>
-                  <a class="btn btn-danger" href="index.php?txtID=<?= $registro['id'] ?>" role="button">Eliminar</a>
+                  <a class="btn btn-danger" href="javascript:borrar(<?= $registro['id'] ?>)" role="button">Eliminar</a>
                 </td>
               </tr>
             <?php } ?>
@@ -54,5 +55,7 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
   </div>
 </div>
+
+
 
 <?php require_once '../../templates/footer.php' ?>

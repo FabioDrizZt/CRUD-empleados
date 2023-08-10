@@ -1,6 +1,7 @@
 <?php require_once '../../bd.php';
 
-if ($_GET) {
+if ($_GET['txtID']) {
+
   //Recolectar los datos del metodo GET
   $txtID = $_GET['txtID'];
 
@@ -25,7 +26,8 @@ if ($_GET) {
   //Asignar los valores que vienen del meto GET (del formulario)
   $sentencia->bindParam(':id', $txtID);
   $sentencia->execute();
-  header("Location:index.php");
+  $mensaje = "Registro eliminado";
+  header("Location:index.php?mensaje=$mensaje");
 }
 
 $sentencia = $conexion->prepare("SELECT *, (
@@ -85,7 +87,7 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                   <a class="btn btn-success" href="carta_recomendacion.php?txtID=<?= $registro['id'] ?>" role="button">Carta</a>
                   <a class="btn btn-info" href="editar.php?txtID=<?= $registro['id'] ?>" role="button">Editar</a>
-                  <a class="btn btn-danger" href="index.php?txtID=<?= $registro['id'] ?>" role="button">Eliminar</a>
+                  <a class="btn btn-danger" href="javascript:borrar(<?= $registro['id'] ?>)" role="button">Eliminar</a>
                 </td>
               </tr>
             <?php } ?>
@@ -96,5 +98,6 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
+
 
 <?php require_once '../../templates/footer.php' ?>
