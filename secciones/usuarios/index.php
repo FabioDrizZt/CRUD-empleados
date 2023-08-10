@@ -1,6 +1,6 @@
 <?php require_once '../../bd.php';
 
-if($_GET){
+if ($_GET) {
   //Recolectar los datos del metodo GET
   $txtID = $_GET['txtID'];
   //preparo la inserción de los datos
@@ -26,7 +26,7 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table aria-label="tabla de usuarios" class="table ">
+        <table aria-label="tabla de usuarios" class="table " id="tabla_id">
           <thead>
             <tr>
               <th scope="col">ID</th>

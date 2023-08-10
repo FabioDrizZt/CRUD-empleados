@@ -48,7 +48,7 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table aria-label="tabla de empleados" class="table ">
+        <table aria-label="tabla de empleados" class="table " id="tabla_id">
           <thead>
             <tr>
               <th scope="col">#</th>
