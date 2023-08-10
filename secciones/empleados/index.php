@@ -83,7 +83,7 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <td><?= $registro['puesto'] ?></td>
                 <td><?= $registro['fechadeingreso'] ?></td>
                 <td>
-                  <a class="btn btn-success" href="#" role="button">Carta</a>
+                  <a class="btn btn-success" href="carta_recomendacion.php?txtID=<?= $registro['id'] ?>" role="button">Carta</a>
                   <a class="btn btn-info" href="editar.php?txtID=<?= $registro['id'] ?>" role="button">Editar</a>
                   <a class="btn btn-danger" href="index.php?txtID=<?= $registro['id'] ?>" role="button">Eliminar</a>
                 </td>
