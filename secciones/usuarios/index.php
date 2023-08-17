@@ -1,6 +1,6 @@
 <?php require_once '../../bd.php';
 
-if ($_GET['txtID']) {
+if (isset($_GET['txtID'])) {
 
   //Recolectar los datos del metodo GET
   $txtID = $_GET['txtID'];
